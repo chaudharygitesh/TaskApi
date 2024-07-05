@@ -9,7 +9,7 @@ namespace shared.Model
 {
     public class RegistrationModel
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
          [MinLength(3)]
          [MaxLength(50)]

@@ -11,7 +11,7 @@ namespace Task.Application.IServices
     public interface IServices
     {
         public void AddUser(RegistrationModel user);
-        public RegistrationModel GetUserById(int id);
+        public RegistrationModel GetUserById(int Id);
     }
 
 }

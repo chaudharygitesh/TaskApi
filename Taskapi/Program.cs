@@ -1,4 +1,9 @@
 
+using Task.Application.IRepository;
+using Task.Application.IServices;
+using Task.Infrastructure.Implementation.Repository;
+using Task.Infrastructure.Implementation.Services;
+
 namespace Taskapi
 {
     public class Program
@@ -13,8 +18,10 @@ namespace Taskapi
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddTransient<IRepository, UserRepository>();
+            builder.Services.AddTransient<IServices, UserServices>();
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
