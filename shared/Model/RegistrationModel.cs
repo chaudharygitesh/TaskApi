@@ -9,6 +9,7 @@ namespace shared.Model
 {
     public class RegistrationModel
     {
+        [Key]
         public int Id { get; set; }
         [Required]
          [MinLength(3)]
@@ -37,8 +38,7 @@ namespace shared.Model
         [Required]
         public string Password { get; set; }
 
-        [Required]
-        public string ConfirmPassword { get; set; }
+
 
         [Required]
         public string Country { get; set; }

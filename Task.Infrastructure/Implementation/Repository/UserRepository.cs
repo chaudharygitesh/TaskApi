@@ -21,6 +21,9 @@ namespace Task.Infrastructure.Implementation.Repository
             return user;
         }
 
-     
+        public RegistrationModel GetUserById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

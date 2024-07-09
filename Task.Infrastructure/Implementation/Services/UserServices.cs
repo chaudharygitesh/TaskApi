@@ -22,7 +22,7 @@ namespace Task.Infrastructure.Implementation.Services
 
         public RegistrationModel GetUserById(int Id)
         {
-            _UserRepository.GetUserById(Id);
+            return _UserRepository.GetUserById(Id);
         }
     }
 }
