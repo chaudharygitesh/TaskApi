@@ -14,9 +14,13 @@ namespace Task.Infrastructure.DbCont
         {
         }
         public virtual DbSet<RegistrationModel> Shopping { get; set; }
+        public virtual DbSet<sellercredentials> SellerCred { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RegistrationModel>(entity => {
+                entity.HasKey(k => k.Id);
+            });
+            modelBuilder.Entity<sellercredentials>(entity => {
                 entity.HasKey(k => k.Id);
             });
             OnModelCreatingPartial(modelBuilder);
