@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using shared.Model;
+using System;
 using Task.Infrastructure.DbCont;
 
 namespace Taskapi.Controllers
@@ -33,9 +34,30 @@ namespace Taskapi.Controllers
             return CreatedAtAction(nameof(PostsellerInfo), new { id = model.Id }, model);
         }
         [HttpPut]
-        public ActionResult<sellercredentials> UpdateSellerInfo(sellercredentials model)
+        public IActionResult Update(sellercredentials person)
         {
+            _context.Update(person);
+            _context.SaveChanges();
+            var patched = _context.SellerCred.FirstOrDefault(a => a.Id == person.Id);
 
+            var model = new
+            {
+                sent = person,
+                after = patched
+            };
+            return Ok(model);
+        }
+        [HttpDelete]
+        [HttpDelete("Remove/{productid}")]
+        public ActionResult<sellercredentials> DeleteProduct(int productid)
+        {
+            var products = _context.SellerCred.Find(productid);
+
+            if (products == null) return NotFound();
+            _context.SellerCred.Remove(products);
+
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

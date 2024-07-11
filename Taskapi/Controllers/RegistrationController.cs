@@ -21,6 +21,32 @@ namespace Taskapi.Controllers
         {
             return _context.Shopping.ToList();
         }
+        //[HttpPost("register")]
+        //public async Task<IActionResult> Register(RegisterDto registerDto)
+        //{
+        //    if (_context.GDUser.Any(u => u.Email == registerDto.Email))
+        //    {
+        //        return BadRequest(new { message = "Email already in use." });
+        //    }
+
+        //    // Hash the password using BCrypt
+        //    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerDto.Password);
+
+        //    var user = new GDUser
+        //    {
+        //        Name = registerDto.Name,
+        //        Email = registerDto.Email,
+        //        Phone = registerDto.Phone,
+        //        Address = registerDto.Address,
+        //        Password = hashedPassword,
+        //        Role = registerDto.Role
+        //    };
+
+        //    _context.GDUser.Add(user);
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(new { message = "User registered successfully." });
+        //}
         [HttpPost]
         public ActionResult<RegistrationModel> GetRegisterInfo(RegistrationModel model)
         {

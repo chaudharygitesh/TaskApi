@@ -12,7 +12,7 @@ namespace shared.Model
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage ="Name Length should be less than 50")]
         public string Name { get; set; }
 
         [Required]
@@ -23,11 +23,11 @@ namespace shared.Model
         public string Contact { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50,ErrorMessage = "Designation  should be less than 50 characters")]
         public string Designation { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 8)]
+        [StringLength(20, MinimumLength = 8, ErrorMessage ="Password should be in ")]
         public string Password { get; set; }
     
 
