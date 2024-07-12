@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using shared.Model;
 using System;
@@ -7,6 +8,7 @@ using Task.Infrastructure.DbCont;
 
 namespace Taskapi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("MyAllowSpecificOrigins")]
@@ -22,6 +24,9 @@ namespace Taskapi.Controllers
         {
             return _context.SellerCred.ToList();
         }
+        [HttpOptions]
+        [HttpPatch]
+        [HttpHead]
         [HttpPost]
         public ActionResult<sellercredentials> PostsellerInfo(sellercredentials model)
         {
@@ -36,18 +41,19 @@ namespace Taskapi.Controllers
         [HttpPut]
         public IActionResult Update(sellercredentials person)
         {
-            _context.Update(person);
-            _context.SaveChanges();
             var patched = _context.SellerCred.FirstOrDefault(a => a.Id == person.Id);
-
-            var model = new
+            if(patched != null)
             {
-                sent = person,
-                after = patched
-            };
-            return Ok(model);
+                patched.Email = person.Email;
+                patched.Password = person.Password;
+                patched.Name=person.Name;
+                patched.Designation = person.Designation;
+                patched.Contact = person.Contact;
+                _context.SaveChanges();
+            }
+            return Ok();
         }
-        [HttpDelete]
+    
         [HttpDelete("Remove/{productid}")]
         public ActionResult<sellercredentials> DeleteProduct(int productid)
         {
